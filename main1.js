@@ -21,8 +21,9 @@ var memload =[];
 var cpuTicks =[];
 var cpuaverage =[];
 var startMeasure = cpuTicksAcrossCores();
-/*
+
 app.listen(3001,'localhost');
+/*
 heart.createEvent(2, function(heartbeat, last){
   memload.push(memoryLoad());
   cpuTicks.push(cpuTicksAcrossCores());
