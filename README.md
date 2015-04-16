@@ -81,4 +81,40 @@ For Task 4,
 
 ![img3](screenshots/canary.png)
 
-The ability to monitor the deployed application for alerts/failures (using at least 2 metrics).
+##### Task 5 - The ability to monitor the deployed application for alerts/failures (using at least 2 metrics).
+
+To monitor the deployed application, we have written nodejs script - (file: monitor.js). After we deploy the stable code, we execute this script which in turn makes 10 requests to the proxy ( 5 requests to each application server ) and writes the value of average memory load and cpu usage in file.json. 
+
+After performing the canary release through jenkins, we execute another script( file:monitor2.js). This script again makes similar 10 requests. After the requests, it compares this value with the previous results and alerts the user whether the canary release has resulted in more cpu consumption or memory load.
+
+Code for monitoring after canary release -
+
+```sh
+var i = 0;
+var totalmemoryload = 0;
+var totalcpu = 0;
+
+for( i=0;i<10;i++)
+{
+	request.get('http://52.5.154.138:3001/monitor', function(req,res) {
+		var resp = JSON.parse(res.body);
+		//console.log(resp.cpu);
+		totalmemoryload = totalmemoryload + resp.memload;
+		totalcpu = totalcpu + resp.cpu;
+	});
+	
+}
+
+setTimeout(function(req,res){
+		var basememval = value.avgmem;
+		var basecpuval = value.avgcpu;
+		console.log("Avg Memory load: "+ totalmemoryload/10);
+		console.log("Avg Cpu load: "+ totalcpu);
+		if(basememval < (totalmemoryload/10))
+			console.log("Canary release results in higher memory load");
+		if(basecpuval < (totalcpu))
+			console.log("Canary release results in higher cpu usage");
+}, 1000);
+```
+
+![img10](screenshots/monitoring.JPG)
