@@ -45,17 +45,31 @@ Thus the configuration task is finished
 For Task 2,
   - We used Jenkins.
   - In jenkins, we created a new job to perfrom the build operation. In the build action, we wrote shell script to perform necessary installation, export the built artifacts to remote machine and perform 'npm install' to install all the required dependencies. 
-  - Then using 'ssh' command we logged into the remote machine.
+  - Then using 'ssh' command we logged into the remote machine. For 'ssh' onto remote system, we used 'ssh -i <security_key> <user>@<public DNS>'. The security key is obtained from the access key pair of the user in aws.amazon.com
   - On one of the remote machine, we executed our app and on the other remote machine, we executed proxy.
 
 ![img1](screenshots/jenkins-config-1.png)
 ![img2](screenshots/jenkins-config-2.png)
+
+The below screenshots gives the result obtained (BUILD: SUCCESS) on making the build, pushing the files onto remote machines and running app and proxy on respective remote machines.
+
+![img4](screenshots/screen-build-jenkins.png)
+
+Here is a screenshot that shows that the files are copied onto our remote system and 'npm install' was executed to get the necessary node module.
+
+![img5](screenshots/files.png)
+
+This screenshot shows accessing the app server and proxy server of the remote machines using their respective public ip.
+
+![img5](screenshots/monitor.png)
 
 ##### Task 3 - The deployment must occur on an actual remote machine/VM (e.g. AWS, droplet, VCL), and not a local VM.
 
 For Task 3, 
   - As a basic configuration, we have created 3 ec2 instances, two of which will work as app and the third as proxy.
   - Use of two 2 ec2 instances is significant to demonstrate canary release.
+
+![img3](screenshots/instances.png)
 
 ##### Task 4 - The ability to perform a canary release.
 
