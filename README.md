@@ -88,6 +88,8 @@ For Task 4,
 
 First we have added a route in the application /monitor which returns the memory load and cpu usage of the instance.
 
+![img9](screenshots/monitor.png)
+
 To monitor the deployed application, we have written nodejs script - (file: monitor.js). After we deploy the stable code, we execute this script which in turn makes 10 requests to the proxy ( 5 requests to each application server ) and writes the value of average memory load and cpu usage in file.json. 
 
 After performing the canary release through jenkins, we execute another script( file:monitor2.js). This script again makes similar 10 requests. After the requests, it compares this value with the previous results and alerts the user whether the canary release has resulted in more cpu consumption or memory load.
