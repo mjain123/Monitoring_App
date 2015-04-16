@@ -2,6 +2,9 @@
 
 In this MILESTONE, we will extend our deployment pipeline to support deployment to real machine, and using a canary release strategy.
 
+Deployment Architecture - 
+EC2 machines - 1 Proxy Server, 2 Application Servers
+
 #### Properties
 
 ##### Task 1 - The ability to configure a deployment environment automatically, using a configuration management tool, such as ansible, or configured using vagrant/docker.
@@ -82,6 +85,8 @@ For Task 4,
 ![img3](screenshots/canary.png)
 
 ##### Task 5 - The ability to monitor the deployed application for alerts/failures (using at least 2 metrics).
+
+First we have added a route in the application /monitor which returns the memory load and cpu usage of the instance.
 
 To monitor the deployed application, we have written nodejs script - (file: monitor.js). After we deploy the stable code, we execute this script which in turn makes 10 requests to the proxy ( 5 requests to each application server ) and writes the value of average memory load and cpu usage in file.json. 
 
