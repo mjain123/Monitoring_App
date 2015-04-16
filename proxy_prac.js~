@@ -3,7 +3,7 @@ var options = {};
 var proxy   = httpProxy.createProxyServer(options);
 var express = require('express')
 var app = express();
-var instances = ['http://52.6.85.129:3001', 'http://52.6.85.140:3001']
+var instances = ['http://52.6.85.129:3000', 'http://52.6.85.140:3000']
 
 var TARGET = '';
 var counter = 0;
@@ -24,4 +24,4 @@ proxy.web( req, res, {target: TARGET} );
 
 });
 
-app.listen(3001,'172.31.8.24');
+app.listen(3000,'172.31.8.24');
